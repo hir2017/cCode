@@ -19,4 +19,7 @@ typedef int bool;
 
 bool needToStop();
 bool readDate();
+void setLogPath(char* path);
+void setInputPath(char* path);
+void setTimer(double timer);
 #endif /* DATEVALIDATION_H_ */

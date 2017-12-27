@@ -11,13 +11,31 @@
 #define FileName "time.txt"
 #define LogFile "log.txt"
 #define TimeFormat "%4d-%2d-%2d %2d:%2d:%2d"
-#define TwoHours 7200
 
 FILE *fLog;
 char logStr[200];
 
+char logPath[200];
+char inputPath[200];
+double timeInSecond=7200.0;
+
+void setLogPath(char* path){
+	sprintf(logPath,"%s\\%s",path,LogFile);
+}
+
+void setInputPath(char* path){
+	sprintf(inputPath,"%s\\%s",path,FileName);
+}
+
+void setTimer(double timer){
+	timeInSecond = timer;
+}
+
 bool needToStop(){
-	fLog = fopen(LogFile, "a+"); // a+ (create + append) option will allow appending which is useful in a log file
+	if(logPath[0]==0){
+		sprintf(logPath,"%s",LogFile);
+	}
+	fLog = fopen(logPath, "a+"); // a+ (create + append) option will allow appending which is useful in a log file
 	bool rtn = readDate();
 	fclose(fLog);
 	return rtn;
@@ -40,9 +58,12 @@ bool readDate(){
 
     struct tm timeInFile;
 
-    fp = fopen(FileName, "r");
+    if(inputPath[0]==0){
+    	sprintf(inputPath,"%s",FileName);
+    }
+    fp = fopen(inputPath, "r");
     if (fp == NULL){
-    	sprintf(logStr, "open file : %s failed",FileName);
+    	sprintf(logStr, "open file : %s failed",inputPath);
     	fprintf(fLog, "%s\n",logStr);
         exit(-1);
     }
@@ -66,7 +87,7 @@ bool readDate(){
         time_t time_ = mktime(&timeInFile);
         double diff = difftime(time_,gmtNow);
         if(diff<=0) continue;
-        if(diff>TwoHours) break;
+        if(diff>timeInSecond) break;
         newsInTwoHours = true;
         break;
     }
