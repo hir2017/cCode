@@ -1,0 +1,7 @@
+log.txt
+release/*
+.settings/*
+debug/*
+*.o
+.cproject
+.project
