@@ -14,7 +14,14 @@
 
 int main(void) {
 	bool toStop = needToStop();
-	puts("hahahaqha");
-	printf("!!!Hello World!!!----%d",toStop); /* prints !!!Hello World!!! */
+	printf("!!!Hello World!!!----%d\n",toStop); /* prints !!!Hello World!!! */
+
+
+	setLogPath("C:\\test\\log");
+	setInputPath("C:\\test\\timer");
+	setTimer(3600.0);
+	toStop = needToStop();
+	printf("!!!Hello World!!!----%d\n",toStop); /* prints !!!Hello World!!! */
+
 	return 1;
 }
