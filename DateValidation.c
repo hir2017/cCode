@@ -65,7 +65,7 @@ bool readDate(){
     if (fp == NULL){
     	sprintf(logStr, "open file : %s failed",inputPath);
     	fprintf(fLog, "%s\n",logStr);
-        exit(-1);
+        return false;
     }
 
     int year,month,day,hour,min,sec;
